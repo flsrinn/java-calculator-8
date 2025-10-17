@@ -1,7 +1,10 @@
 package calculator;
 
+import calculator.controller.CalculatorController;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        CalculatorController calcController = new CalculatorController();
+        calcController.run(); // 덧셈 계산기 실행
     }
 }
