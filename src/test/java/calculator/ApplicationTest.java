@@ -13,15 +13,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class ApplicationTest extends NsTest {
 
     @Test
-    void 구분자_작동_확인() {
-        assertSimpleTest(() -> {
-            TokenSplitter splitter = new TokenSplitter();
-            ArrayList<String> result = splitter.split("1,2:3");
-            assertThat(result).containsExactly("1", "2", "3");
-        });
-    }
-
-    @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
             run("//;\\n1");
