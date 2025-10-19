@@ -22,11 +22,11 @@ public class TokenSplitter {
         String[] parts;
         if(custom == null) {
             // 커스텀 구분자가 없으면 기본 구분자로 분리
-            parts = DEFAULT_DELIMS.split(body);
+            parts = DEFAULT_DELIMS.split(body, -1);
         } else {
             // 커스텀 구분자가 있으면 해당 구분자로 분리
             Pattern customPattern = Pattern.compile(Pattern.quote(custom));
-            parts = customPattern.split(body);
+            parts = customPattern.split(body, -1);
         }
 
         // 분리된 문자열 배열을 ArrayList로 변환하여 반환
