@@ -9,7 +9,7 @@ public class DelimiterParser {
     // 커스텀 구분자가 있음을 나타내는 접두사
     private static final String CUSTOM_DELIMITER_PREFIX = "//";
     // 커스텀 구분자 형식 추출을 위한 정규표현식 패턴
-    private static final Pattern CUSTOM_PATTERN = Pattern.compile("^//(.+)\\\\n(.*)$");
+    private static final Pattern CUSTOM_PATTERN = Pattern.compile("^//(.+?)(?:\\\\n|\\n)(.*)$", Pattern.DOTALL);
 
     public String[] parse(String input) {
         // 커스텀 구분자 사용 X -> 기본 구분자
