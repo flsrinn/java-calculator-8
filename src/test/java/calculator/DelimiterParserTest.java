@@ -1,6 +1,6 @@
 package calculator;
 
-import calculator.service.DelimiterParser;
+import calculator.service.utils.DelimiterParser;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
