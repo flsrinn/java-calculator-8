@@ -25,6 +25,9 @@ public class StringCalculatorService {
 
     // 사용자가 입력한 문자열을 받아 유효성 검증, 분리, 합산 과정을 거쳐 최종 결과를 반환
     public int calculate(String input) {
+        // 입력이 비어 있으면 0 반환
+        if (input == null || input.isBlank()) return 0;
+
         // 1. 커스텀 구분자 선언부를 파싱하여 [식, 구분자] 추출
         String[] parsed = parser.parse(input);
         String body = parsed[0];
