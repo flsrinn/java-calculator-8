@@ -22,4 +22,19 @@ class DelimiterParserTest {
         assertThat(res[0]).isEqualTo("1;2;3"); // body
         assertThat(res[1]).isEqualTo(";");     // delimiter
     }
+
+    @Test
+    void 커스텀_기본_혼합_테스트() {
+        String[] res = parser.parse("//;\n1;2,3:4");
+        assertThat(res[0]).isEqualTo("1;2,3:4");
+        assertThat(res[1]).isEqualTo(",|:|;"); // 셋 다 포함
+    }
+
+    @Test
+    void 구분자_사이_공백_허용_테스트() {
+        String[] res = parser.parse("//;\n1 ; 2; 3 ; 4");
+        assertThat(res[0]).isEqualTo("1 ; 2; 3 ; 4");
+        assertThat(res[1]).isEqualTo("\\s*(?:,|:|;)\\s*"); // 공백까지 허용된 정규식
+    }
+
 }
