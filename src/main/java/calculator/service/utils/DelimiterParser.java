@@ -11,22 +11,32 @@ public class DelimiterParser {
     // 커스텀 구분자 형식 추출을 위한 정규표현식 패턴
     private static final Pattern CUSTOM_PATTERN = Pattern.compile("^//(.+?)(?:\\\\n|\\n)(.*)$", Pattern.DOTALL);
 
-    public String[] parse(String input) {
-        // 커스텀 구분자 사용 X -> 기본 구분자
-        if(!input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
-            return new String[] {input, null};
+    public String[] parse(String raw) {
+        if (raw == null) throw new IllegalArgumentException("입력이 비어 있습니다.");
+        String input = raw.strip();
+        if (input.isEmpty()) throw new IllegalArgumentException("입력이 비어 있습니다.");
+
+        // 기본 구분자 모드
+        if (!input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
+            return new String[]{input, null};
         }
 
-        // 정규식 패턴으로 커스텀 구분자와 계산식을 찾음
+        // 커스텀 구분자 모드
         Matcher m = CUSTOM_PATTERN.matcher(input);
-        if (m.find()) {
-            String delimiter = m.group(1); // 첫번째 그룹 - 구분자
-            String body = m.group(2); // 두번째 그룹 - 숫자
-            return new String[]{body, delimiter};
+        if (!m.find()) {
+            throw new IllegalArgumentException("커스텀 구분자 형식 오류: (//<구분자>\\n<숫자들>)");
         }
 
-        // TODO: 커스텀 구분자 형식이지만, 패턴에 맞지 않는 경우 예외 처리 구현 예정
-        return new String[] {input, null};
-    }
+        String delimiter = m.group(1);
+        String body = m.group(2);
 
+        if (delimiter.isEmpty()) {
+            throw new IllegalArgumentException("구분자가 비어 있습니다.");
+        }
+        if (body == null || body.isBlank()) {
+            throw new IllegalArgumentException("숫자 본문이 비어 있습니다.");
+        }
+
+        return new String[]{body, delimiter};
+    }
 }
