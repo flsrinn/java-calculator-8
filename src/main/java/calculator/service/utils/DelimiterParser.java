@@ -36,7 +36,21 @@ public class DelimiterParser {
         if (body == null || body.isBlank()) {
             throw new IllegalArgumentException("숫자 본문이 비어 있습니다.");
         }
+        body = body.strip();
 
-        return new String[]{body, delimiter};
+        // 본문에 기본 구분자 존재 여부 체크
+        boolean hasBase = body.indexOf(',') >= 0 || body.indexOf(':') >= 0;
+
+        // 공백 허용
+        String outPattern;
+        if (body.matches(".*\\s+.*")) {
+            outPattern = "\\s*(?:,|:|" + delimiter + ")\\s*";
+        } else {
+            // 공백이 없으면: 기본 구분자가 실제로 있을 때만 확장, 아니면 커스텀만
+            String base = hasBase ? ",|:|" + delimiter : delimiter;
+            outPattern = base;
+        }
+
+        return new String[]{body, outPattern};
     }
 }
