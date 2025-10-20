@@ -11,11 +11,7 @@ public class DelimiterParser {
     // 커스텀 구분자 형식 추출을 위한 정규표현식 패턴
     private static final Pattern CUSTOM_PATTERN = Pattern.compile("^//(.+?)(?:\\\\n|\\n)(.*)$", Pattern.DOTALL);
 
-    public String[] parse(String raw) {
-        if (raw == null) throw new IllegalArgumentException("입력이 비어 있습니다.");
-        String input = raw.strip();
-        if (input.isEmpty()) throw new IllegalArgumentException("입력이 비어 있습니다.");
-
+    public String[] parse(String input) {
         // 기본 구분자 모드
         if (!input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
             return new String[]{input, null};
