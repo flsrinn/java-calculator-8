@@ -1,5 +1,6 @@
-package calculator;
+package calculator.service.utils;
 
+import calculator.Application;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 

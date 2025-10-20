@@ -1,6 +1,5 @@
-package calculator;
+package calculator.service;
 
-import calculator.service.StringCalculatorService;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
