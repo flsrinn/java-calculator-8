@@ -1,6 +1,8 @@
 package calculator.service;
 
-import calculator.service.utils.Adder;
+import calculator.service.ops.Operation;
+import calculator.service.ops.OperationFactory;
+import calculator.service.ops.OperationType;
 import calculator.service.utils.DelimiterParser;
 import calculator.service.utils.TokenSplitter;
 
@@ -10,17 +12,15 @@ import java.util.ArrayList;
 public class StringCalculatorService {
     // 입력 문자열에서 커스텀 구분자와 숫자 본문을 추출하는 파서
     private final DelimiterParser parser;
-    // 입력값과 토큰 유효성 검증
-    private final InputValidator validator;
     // 사용자가 입력한 문자열을 구분자 기준으로 토큰으로 분리
     private final TokenSplitter splitter;
     // 숫자 토큰 리스트의 합계를 계산
-    private final Adder adder;
+    private final Operation operation;
 
     public StringCalculatorService() {
         this.parser = new DelimiterParser();
         this.splitter = new TokenSplitter();
-        this.adder = new Adder();
+        this.operation = OperationFactory.of(OperationType.ADD); // 기본 연산: 더하기
     }
 
     // 사용자가 입력한 문자열을 받아 유효성 검증, 분리, 합산 과정을 거쳐 최종 결과를 반환

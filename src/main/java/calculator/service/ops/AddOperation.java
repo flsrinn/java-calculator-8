@@ -1,10 +1,11 @@
-package calculator.service.utils;
+package calculator.service.ops;
 
 import java.util.ArrayList;
 
-// 문자열 형태의 숫자 토큰 리스트를 받아 합계 계산
-public class Adder {
-    public int sum(ArrayList<String> tokens) {
+// 덧셈을 수행하는 클래스
+public class AddOperation implements Operation{
+    @Override
+    public int apply(ArrayList<String> tokens) {
         int total = 0;
 
         for(String token: tokens) {
